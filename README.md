@@ -1,6 +1,6 @@
 # Gulla.Episerver.Labs.LanguageManager.OpenAi 🤖
 
-This addon for Optimizely CMS that enables EPiServer.Labs.LanguageManager to auto-translate content using OpenAI.
+This addon for Optimizely CMS enables EPiServer.Labs.LanguageManager to auto-translate content using OpenAI.
 
 ## Installation
 
