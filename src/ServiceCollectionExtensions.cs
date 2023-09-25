@@ -13,7 +13,7 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
 
         public static IServiceCollection AddLanguageManagerOpenAi(this IServiceCollection services, Action<LanguageManagerOpenAiOptions> setupAction)
         {
-            services.AddTransient<OpenAiService, OpenAiService>();
+            services.AddTransient<LanguageManagerOpenAiService, LanguageManagerOpenAiService>();
             
             services.AddOptions<LanguageManagerOpenAiOptions>().Configure<IConfiguration>((options, configuration) =>
             {

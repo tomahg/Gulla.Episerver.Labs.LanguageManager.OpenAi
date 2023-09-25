@@ -8,7 +8,7 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
 {
     public class OpenAiTranslatorProvider : IMachineTranslatorProvider
     {
-        private Injected<OpenAiService> _openAiService;
+        private Injected<LanguageManagerOpenAiService> _openAiService;
 
         public string DisplayName => "OpenAI Translator";
 

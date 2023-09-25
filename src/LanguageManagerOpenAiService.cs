@@ -7,22 +7,19 @@ using Newtonsoft.Json;
 
 namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
 {
-    public class OpenAiService
+    public class LanguageManagerOpenAiService
     {
-        private readonly HttpClient _client;
         private readonly IOptions<LanguageManagerOpenAiOptions> _options;
         private readonly string _endpointCompletions = "https://api.openai.com/v1/chat/completions";
 
-        public OpenAiService(HttpClient httpClient, IOptions<LanguageManagerOpenAiOptions> options)
+        public LanguageManagerOpenAiService(IOptions<LanguageManagerOpenAiOptions> options)
         {
             if (options.Value.OpenAiApiKey == null)
             {
                 throw new ArgumentException("Missing OpenAI API Key for Gulla.Episerver.Labs.LanguageManager.OpenAi!");
             }
 
-            _options = options;
-            _client = httpClient;
-            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {_options.Value.OpenAiApiKey}");
+            _options = options;            
         }
 
         /// <summary>
@@ -34,6 +31,9 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
         /// <returns></returns>
         public async Task<string> TranslateText(string input, string fromLanguageName, string toLanguageName)
         {
+            using var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_options.Value.OpenAiApiKey}");
+
             var prompt = $"Translate the following content from {fromLanguageName} to {toLanguageName}.";
             if (!string.IsNullOrEmpty(_options.Value.OpenAiExtraPrompt))
             {
@@ -46,7 +46,7 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
             var content = new StringContent(JsonConvert.SerializeObject(new { messages = messages, model = _options.Value.OpenAiModel, temperature = _options.Value.OpenAiTemperature }), Encoding.UTF8, "application/json");
             request.Content = content;
 
-            var response = await _client.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             var data = JsonConvert.DeserializeObject<dynamic>(json);
 
