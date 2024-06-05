@@ -23,13 +23,13 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
         }
 
         /// <summary>
-        /// Translate text
+        /// Translate text from source from one language to another language using OpenAI
         /// </summary>
-        /// <param name="input">The text to translate</param>
+        /// <param name="text">The text to translate</param>
         /// <param name="fromLanguageName">The name of the source language</param>
         /// <param name="toLanguageName">The name of the destination language</param>
         /// <returns></returns>
-        public async Task<string> TranslateText(string input, string fromLanguageName, string toLanguageName)
+        public async Task<string> TranslateText(string text, string fromLanguageName, string toLanguageName)
         {
             using var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_options.Value.OpenAiApiKey}");
@@ -37,9 +37,9 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
             var prompt = $"Translate the following content from {fromLanguageName} to {toLanguageName}.";
             if (!string.IsNullOrEmpty(_options.Value.OpenAiExtraPrompt))
             {
-                prompt += _options.Value.OpenAiExtraPrompt;
+                prompt += " " + _options.Value.OpenAiExtraPrompt;
             }
-            prompt += $"\r\n\r\n{input}";
+            prompt += $"\r\n\r\n{text}";
 
             var request = new HttpRequestMessage(HttpMethod.Post, _endpointCompletions);
             var messages = new []{ new{role = "user", content = prompt } };
@@ -56,13 +56,13 @@ namespace Gulla.Episerver.Labs.LanguageManager.OpenAi
                 throw new Exception(errorMessage);
             }
 
-            var text = data?.choices[0]?.message?.content?.ToString();
-            if (!string.IsNullOrEmpty(text))
+            var translatedText = data?.choices[0]?.message?.content?.ToString();
+            if (!string.IsNullOrEmpty(translatedText))
             {
-                return text ?? "";
+                return translatedText ?? "";
             }
 
-            return "Error generating AI text";
+            return "Error translating text";
         }
     }
 }
