@@ -25,6 +25,11 @@ Below is a code snippet with all possible configuration options. The only requir
 })
 ```
 
+The default values are
+
+-   OpenAiModel = "gpt-4o"
+-   OpenAiTemperature = 0.7
+
 You can also configure SqlStudio using `appsettings.json`. A configuration setting specified in `appsettings.json` will override any configuration configured in `Startup.cs`. See the example below:
 
 ```JSON
