@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -10,17 +10,17 @@
     <Title>Gulla.Episerver.Labs.LanguageManager.OpenAi</Title>
     <PackageId>Gulla.Episerver.Labs.LanguageManager.OpenAi</PackageId>
     <Authors>Tomas Hensrud Gulla</Authors>
-    <Version>1.0.2</Version>
-    <PackageVersion>1.0.2</PackageVersion>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.1.0</Version>
+    <PackageVersion>1.1.0</PackageVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
     <Description>An addon for EPiServer.Labs.LanguageManager that enables translation using OpenAI.</Description>
     <PackageTags>Optimizely LanguageManager AI Translation OpenAI Translator</PackageTags>
     <PackageProjectUrl>https://github.com/tomahg/Gulla.Episerver.Labs.LanguageManager.OpenAi/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tomahg/Gulla.Episerver.Labs.LanguageManager.OpenAi/</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Use gpt-4o as default model when translating</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgade to .NET 8</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
